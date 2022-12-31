@@ -1,4 +1,4 @@
-package com.aktie.domain.entities;
+package com.aktie.presentation.dto;
 
 import java.time.LocalDateTime;
 
@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
  *
  * @author SRamos
  */
-public class AccountBO {
+public class AccountDTO {
 
     private Integer id;
 

@@ -1,4 +1,4 @@
-package com.aktie;
+package com.aktie.infra.restClient;
 
 import java.util.List;
 import java.util.Set;

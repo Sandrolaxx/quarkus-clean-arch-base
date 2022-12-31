@@ -1,10 +1,10 @@
-package com.aktie.domain.entities;
+package com.aktie.presentation.dto;
 
 /**
  *
  * @author SRamos
  */
-public class UserBO {
+public class UserDTO {
 
     private Integer id;
     
