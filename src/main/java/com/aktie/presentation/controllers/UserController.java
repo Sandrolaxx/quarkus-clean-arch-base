@@ -1,10 +1,11 @@
 package com.aktie.presentation.controllers;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.aktie.presentation.dto.UserDTO;
 import com.aktie.services.CreateUserService;
@@ -15,16 +16,11 @@ public class UserController {
     @Inject
     CreateUserService createUserService;
 
-    @GET
+    @POST
     @Produces(MediaType.TEXT_PLAIN)
-    public String hello() throws Exception {
-        UserDTO testDto = new UserDTO();
+    public Response hello(UserDTO userDTO) throws Exception {
+        UserDTO createdUser = createUserService.handle(userDTO);
 
-        testDto.setDocument("10564574902");
-        testDto.setName("Sandrolax Ramos");
-
-        createUserService.handle(testDto);
-
-        return "Hello RESTEasy";
+        return Response.ok(createdUser).build();
     }
 }

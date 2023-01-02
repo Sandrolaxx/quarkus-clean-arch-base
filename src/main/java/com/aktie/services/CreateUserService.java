@@ -11,12 +11,12 @@ import com.aktie.presentation.dto.UserDTO;
 public class CreateUserService {
     
     @Transactional
-    public void handle(UserDTO userDTO) throws Exception {
+    public UserDTO handle(UserDTO userDTO) throws Exception {
 
         PanacheUserRepository panacheUserRepository = new PanacheUserRepository();
         CreateUser createUser = new CreateUser(panacheUserRepository);
 
-        createUser.execute(userDTO);
+        return createUser.execute(userDTO);
 
     }
 
