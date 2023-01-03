@@ -3,9 +3,9 @@ package com.aktie.services;
 import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
 
+import com.aktie.domain.entities.dto.UserDTO;
 import com.aktie.domain.useCases.CreateUser;
 import com.aktie.infra.database.panache.repositories.PanacheUserRepository;
-import com.aktie.presentation.dto.UserDTO;
 
 @ApplicationScoped
 public class CreateUserService {

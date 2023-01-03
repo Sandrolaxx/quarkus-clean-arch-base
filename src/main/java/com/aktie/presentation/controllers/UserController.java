@@ -7,7 +7,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.aktie.presentation.dto.UserDTO;
+import com.aktie.domain.entities.dto.UserDTO;
 import com.aktie.services.CreateUserService;
 
 @Path("/hello")

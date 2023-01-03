@@ -1,10 +1,9 @@
 package com.aktie.domain.useCases;
 
 import com.aktie.domain.entities.UserBO;
+import com.aktie.domain.entities.dto.UserDTO;
 import com.aktie.domain.entities.mappers.UserMapper;
 import com.aktie.domain.repositories.UserRepository;
-import com.aktie.presentation.dto.UserDTO;
-import com.aktie.utils.ValidatorUtil;
 
 /**
  *
@@ -18,7 +17,6 @@ public class CreateUser {
     }
 
     public UserDTO execute(UserDTO userDto) throws Exception {
-        ValidatorUtil.verifyUserDto(userDto);
 
         UserBO existingUserBO = userRepository.findByDocument(userDto.getDocument());
 
@@ -26,7 +24,9 @@ public class CreateUser {
             throw new Exception("Usuário existente");
         }
 
-        UserBO userBO = userRepository.createUser(userDto);
+        UserBO userBO = UserMapper.toBO(userDto);
+
+        userBO = userRepository.createUser(userBO);
 
         return UserMapper.toDTO(userBO);
     }
