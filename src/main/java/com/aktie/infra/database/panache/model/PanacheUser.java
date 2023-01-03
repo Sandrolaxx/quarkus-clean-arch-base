@@ -1,12 +1,16 @@
 package com.aktie.infra.database.panache.model;
 
+import java.time.LocalDateTime;
+import java.util.UUID;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.GenericGenerator;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
@@ -17,12 +21,11 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 @Entity
 @Table(name = "AKT_USER")
 public class PanacheUser extends PanacheEntityBase {
-    
+
     @Id
-    @SequenceGenerator(name = "ID_AKT_USER", sequenceName = "GEN_MILK_TITLE", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_AKT_USER")
-    @Column(name = "ID", nullable = false, precision = 0, scale = -127)
-    private Integer id;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    private UUID id;
 
     @Column(name = "NAME")
     private String name;
@@ -30,11 +33,18 @@ public class PanacheUser extends PanacheEntityBase {
     @Column(name = "DOCUMENT")
     private String document;
 
-    public Integer getId() {
+    @CreationTimestamp
+    @Column(name = "CREATED_AT")
+    private LocalDateTime createdAt;
+
+    @Column(name = "DISABLED_AT")
+    private LocalDateTime disabledAt;
+
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -52,6 +62,22 @@ public class PanacheUser extends PanacheEntityBase {
 
     public void setDocument(String document) {
         this.document = document;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getDisabledAt() {
+        return disabledAt;
+    }
+
+    public void setDisabledAt(LocalDateTime disabledAt) {
+        this.disabledAt = disabledAt;
     }
 
 }

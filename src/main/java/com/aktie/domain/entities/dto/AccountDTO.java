@@ -1,4 +1,4 @@
-package com.aktie.presentation.dto;
+package com.aktie.domain.entities.dto;
 
 import java.time.LocalDateTime;
 

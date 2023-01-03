@@ -1,31 +1,32 @@
 package com.aktie.infra.database.panache.mappers;
 
 import com.aktie.domain.entities.UserBO;
+import com.aktie.domain.entities.vo.UserNameVO;
 import com.aktie.infra.database.panache.model.PanacheUser;
-import com.aktie.presentation.dto.UserDTO;
 
 /**
  *
  * @author SRamos
  */
 public class PanacheUserMapper {
-    
+
     public static UserBO toDomain(PanacheUser panacheUser) {
-        var userBO = new UserBO();
-        
-        userBO.setId(panacheUser.getId());
-        userBO.setName(panacheUser.getName());
-        userBO.setDocument(panacheUser.getDocument());
+        var userBO = new UserBO(
+                panacheUser.getId(),
+                new UserNameVO(panacheUser.getName()),
+                panacheUser.getDocument(),
+                panacheUser.getCreatedAt(),
+                panacheUser.getDisabledAt());
 
         return userBO;
     }
-    
-    public static PanacheUser toEntity(UserDTO userDTO) {
+
+    public static PanacheUser toEntity(UserBO userBO) {
         var panacheUser = new PanacheUser();
 
-        panacheUser.setName(userDTO.getName());
-        panacheUser.setDocument(userDTO.getDocument());
-        
+        panacheUser.setName(userBO.getName().getValue());
+        panacheUser.setDocument(userBO.getDocument());
+
         return panacheUser;
     }
 

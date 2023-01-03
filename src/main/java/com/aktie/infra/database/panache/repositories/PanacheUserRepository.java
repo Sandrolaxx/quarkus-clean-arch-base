@@ -4,7 +4,6 @@ import com.aktie.domain.entities.UserBO;
 import com.aktie.domain.repositories.UserRepository;
 import com.aktie.infra.database.panache.mappers.PanacheUserMapper;
 import com.aktie.infra.database.panache.model.PanacheUser;
-import com.aktie.presentation.dto.UserDTO;
 
 /**
  *
@@ -13,7 +12,7 @@ import com.aktie.presentation.dto.UserDTO;
 public class PanacheUserRepository implements UserRepository {
 
     @Override
-    public UserBO createUser(UserDTO userDTO) {
+    public UserBO createUser(UserBO userDTO) {
         var panacheUser = PanacheUserMapper.toEntity(userDTO);
 
         panacheUser.persist();

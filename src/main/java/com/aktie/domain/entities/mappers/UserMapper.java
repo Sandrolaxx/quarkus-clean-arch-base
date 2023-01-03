@@ -1,7 +1,8 @@
 package com.aktie.domain.entities.mappers;
 
 import com.aktie.domain.entities.UserBO;
-import com.aktie.presentation.dto.UserDTO;
+import com.aktie.domain.entities.dto.UserDTO;
+import com.aktie.domain.entities.vo.UserNameVO;
 
 /**
  *
@@ -13,19 +14,19 @@ public class UserMapper {
         var userDTO = new UserDTO();
 
         userDTO.setDocument(userBO.getDocument());
-        userDTO.setName(userBO.getName());
+        userDTO.setName(userBO.getName().getValue());
         userDTO.setId(userBO.getId());
 
         return userDTO;
     }
 
-    public static UserDTO toBO(UserDTO userDTO) {
-        var userBO = new UserDTO();
-
-        userBO.setDocument(userDTO.getDocument());
-        userBO.setName(userDTO.getName());
-
-        return userBO;
+    public static UserBO toBO(UserDTO userDTO) {
+        return new UserBO(
+                userDTO.getId(),
+                new UserNameVO(userDTO.getName()),
+                userDTO.getDocument(),
+                null,
+                null);
     }
 
 }

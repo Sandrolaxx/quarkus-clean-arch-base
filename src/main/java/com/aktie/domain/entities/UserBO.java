@@ -1,39 +1,57 @@
 package com.aktie.domain.entities;
 
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+import com.aktie.domain.entities.vo.UserNameVO;
+
 /**
  *
  * @author SRamos
  */
 public class UserBO {
 
-    private Integer id;
-    
-    private String name;
+    private UUID id;
+
+    private UserNameVO name;
 
     private String document;
 
-    public Integer getId() {
+    private LocalDateTime createdAt;
+
+    private LocalDateTime disabledAt;
+
+    public UserBO(UUID id, UserNameVO name, String document,
+            LocalDateTime createdAt, LocalDateTime disabledAt) {
+        this.id = id;
+        this.name = name;
+        this.document = document;
+        this.disabledAt = disabledAt;
+        this.createdAt = createdAt != null ? createdAt : LocalDateTime.now();
+    }
+
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
+    public UserNameVO getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getDocument() {
         return document;
     }
 
-    public void setDocument(String document) {
-        this.document = document;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public LocalDateTime getDisabledAt() {
+        return disabledAt;
+    }
+
+    public void handleDisable() {
+        this.disabledAt = LocalDateTime.now();
     }
 
 }
