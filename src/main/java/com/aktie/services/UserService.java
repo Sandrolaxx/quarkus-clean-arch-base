@@ -8,7 +8,7 @@ import com.aktie.domain.useCases.CreateUser;
 import com.aktie.infra.database.panache.repositories.PanacheUserRepository;
 
 @ApplicationScoped
-public class CreateUserService {
+public class UserService {
     
     @Transactional
     public UserDTO handle(UserDTO userDTO) throws Exception {

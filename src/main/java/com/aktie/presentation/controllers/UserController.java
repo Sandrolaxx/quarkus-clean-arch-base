@@ -8,18 +8,18 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.aktie.domain.entities.dto.UserDTO;
-import com.aktie.services.CreateUserService;
+import com.aktie.services.UserService;
 
 @Path("/hello")
 public class UserController {
 
     @Inject
-    CreateUserService createUserService;
+    UserService userService;
 
     @POST
     @Produces(MediaType.TEXT_PLAIN)
     public Response hello(UserDTO userDTO) throws Exception {
-        UserDTO createdUser = createUserService.handle(userDTO);
+        UserDTO createdUser = userService.handle(userDTO);
 
         return Response.ok(createdUser).build();
     }

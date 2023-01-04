@@ -1,4 +1,4 @@
-package com.aktie.utils;
+package com.aktie.domain.utils;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
