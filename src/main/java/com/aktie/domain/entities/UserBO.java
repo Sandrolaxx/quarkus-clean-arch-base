@@ -1,9 +1,12 @@
 package com.aktie.domain.entities;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
-import com.aktie.domain.entities.vo.UserNameVO;
+import com.aktie.domain.entities.enums.EnumErrorCode;
+import com.aktie.domain.entities.vo.CreatedAtVO;
+import com.aktie.domain.entities.vo.UuidVO;
+import com.aktie.domain.utils.StringUtil;
+import com.aktie.domain.utils.exception.AktieException;
 
 /**
  *
@@ -11,30 +14,32 @@ import com.aktie.domain.entities.vo.UserNameVO;
  */
 public class UserBO {
 
-    private UUID id;
+    private UuidVO id;
 
-    private UserNameVO name;
+    private String name;
 
     private String document;
 
-    private LocalDateTime createdAt;
+    private CreatedAtVO createdAt;
 
     private LocalDateTime disabledAt;
 
-    public UserBO(UUID id, UserNameVO name, String document,
-            LocalDateTime createdAt, LocalDateTime disabledAt) {
+    public UserBO(UuidVO id, String name, String document,
+            CreatedAtVO createdAt, LocalDateTime disabledAt) {
         this.id = id;
         this.name = name;
         this.document = document;
         this.disabledAt = disabledAt;
-        this.createdAt = createdAt != null ? createdAt : LocalDateTime.now();
+        this.createdAt = createdAt;
+
+        validate();
     }
 
-    public UUID getId() {
+    public UuidVO getId() {
         return id;
     }
 
-    public UserNameVO getName() {
+    public String getName() {
         return name;
     }
 
@@ -42,7 +47,7 @@ public class UserBO {
         return document;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public CreatedAtVO getCreatedAt() {
         return createdAt;
     }
 
@@ -52,6 +57,16 @@ public class UserBO {
 
     public void handleDisable() {
         this.disabledAt = LocalDateTime.now();
+    }
+
+    private void validate() {
+        if (StringUtil.isNullOrEmpty(name)) {
+            throw new AktieException(EnumErrorCode.CAMPO_OBRIGATORIO, "nome");
+        }
+
+        if (StringUtil.isNullOrEmpty(document)) {
+            throw new AktieException(EnumErrorCode.CAMPO_OBRIGATORIO, "documento");
+        }
     }
 
 }

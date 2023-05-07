@@ -1,6 +1,6 @@
 package com.aktie.domain.entities.dto;
 
-import java.util.UUID;
+import java.time.LocalDateTime;
 
 /**
  *
@@ -8,17 +8,21 @@ import java.util.UUID;
  */
 public class UserDTO {
 
-    private UUID id;
+    private String id;
     
     private String name;
 
     private String document;
 
-    public UUID getId() {
+    private LocalDateTime createdAt;
+
+    private LocalDateTime disabledAt;
+
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -36,6 +40,22 @@ public class UserDTO {
 
     public void setDocument(String document) {
         this.document = document;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getDisabledAt() {
+        return disabledAt;
+    }
+
+    public void setDisabledAt(LocalDateTime disabledAt) {
+        this.disabledAt = disabledAt;
     }
 
 }
