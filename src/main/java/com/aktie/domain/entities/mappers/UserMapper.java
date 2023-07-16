@@ -19,7 +19,7 @@ public class UserMapper {
         dto.setId(bo.getId().getValue().toString());
         dto.setDisabledAt(bo.getDisabledAt());
         dto.setUpdatedAt(bo.getUpdatedAt());
-        dto.setCreatedAt(bo.getCreatedAt().getValue());
+        dto.setCreatedAt(bo.getCreatedAt() != null ? bo.getCreatedAt().getValue() : null);
 
         return dto;
     }

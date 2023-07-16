@@ -6,7 +6,7 @@ import com.aktie.domain.entities.dto.UserDTO;
 import com.aktie.domain.entities.enums.EnumErrorCode;
 import com.aktie.domain.entities.mappers.UserMapper;
 import com.aktie.domain.entities.vo.QueryFieldInfoVO;
-import com.aktie.domain.repositories.UserRepository;
+import com.aktie.domain.repositories.IUserRepository;
 import com.aktie.domain.utils.exception.AktieException;
 
 /**
@@ -15,9 +15,9 @@ import com.aktie.domain.utils.exception.AktieException;
  */
 public class CreateUser {
 
-    private UserRepository userRepository;
+    private IUserRepository userRepository;
 
-    public CreateUser(UserRepository userRepository) {
+    public CreateUser(IUserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

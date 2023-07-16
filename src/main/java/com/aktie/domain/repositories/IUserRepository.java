@@ -9,7 +9,7 @@ import com.aktie.domain.entities.vo.QueryFieldInfoVO;
  *
  * @author SRamos
  */
-public interface UserRepository {
+public interface IUserRepository {
 
     UserBO create(UserBO bo);
 

@@ -7,7 +7,7 @@ import javax.enterprise.context.ApplicationScoped;
 
 import com.aktie.domain.entities.UserBO;
 import com.aktie.domain.entities.vo.QueryFieldInfoVO;
-import com.aktie.domain.repositories.UserRepository;
+import com.aktie.domain.repositories.IUserRepository;
 import com.aktie.domain.utils.ListUtil;
 import com.aktie.domain.utils.StringUtil;
 import com.aktie.infra.database.panache.mappers.PanacheUserMapper;
@@ -18,7 +18,7 @@ import com.aktie.infra.database.panache.model.PanacheUser;
  * @author SRamos
  */
 @ApplicationScoped
-public class PanacheUserRepository implements UserRepository {
+public class PanacheUserRepository implements IUserRepository {
 
     @Override
     public UserBO create(UserBO bo) {
