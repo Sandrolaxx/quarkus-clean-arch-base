@@ -10,10 +10,12 @@ import com.aktie.domain.utils.EnumUtil;
  */
 public enum EnumErrorCode implements IEnum {
 
-    // Erros API
+    // Internal errors
     CAMPO_OBRIGATORIO("001", "O campo {0} é obrigatório!", HttpStatus.SC_BAD_REQUEST),
-    USUARIO_CADASTRADO("002", "Usuário já cadastrado!", HttpStatus.SC_BAD_REQUEST),
-    // Erros externos
+    USUARIO_CADASTRADO("002", "Usuário já possui cadastro ativo!", HttpStatus.SC_BAD_REQUEST),
+    USUARIO_NAO_ENCONTRADO_FILTROS("003", "Nenhum usuário encontrado para ({0}) informado!", HttpStatus.SC_NOT_FOUND),
+    CAMPO_INVALIDO("004", "{0} informado inválido!", HttpStatus.SC_NOT_FOUND),
+    // External errors
     ERRO_COMUNICACAO("050", "A requisição enviada ao parceiro retornou com erro!", HttpStatus.SC_BAD_GATEWAY);
 
     private final String key;

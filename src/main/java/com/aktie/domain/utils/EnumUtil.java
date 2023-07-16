@@ -6,6 +6,7 @@ import com.aktie.domain.entities.enums.IEnum;
  *
  * @author SRamos
  */
+@SuppressWarnings("all")
 public class EnumUtil {
 
     public static boolean isEquals(Enum one, Enum another) {

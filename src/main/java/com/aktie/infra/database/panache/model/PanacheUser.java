@@ -8,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.CreationTimestamp;
-
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 /**
@@ -29,9 +27,11 @@ public class PanacheUser extends PanacheEntityBase {
     @Column(name = "DOCUMENT")
     private String document;
 
-    @CreationTimestamp
     @Column(name = "CREATED_AT")
     private LocalDateTime createdAt;
+
+    @Column(name = "UPDATED_AT")
+    private LocalDateTime updatedAt;
 
     @Column(name = "DISABLED_AT")
     private LocalDateTime disabledAt;
@@ -74,6 +74,14 @@ public class PanacheUser extends PanacheEntityBase {
 
     public void setDisabledAt(LocalDateTime disabledAt) {
         this.disabledAt = disabledAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
 }

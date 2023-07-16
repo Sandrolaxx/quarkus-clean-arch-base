@@ -14,26 +14,32 @@ import com.aktie.domain.utils.exception.AktieException;
  * @author SRamos
  */
 public class CreateUser {
+
     private UserRepository userRepository;
 
     public CreateUser(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    public UserDTO execute(UserDTO userDto) throws Exception {
+    public UserDTO execute(UserDTO dto) {
+        verifyExistingUser(dto.getDocument());
 
-        var queryField = new QueryFieldInfoVO("document", userDto.getDocument());
-        var existingUserBO = userRepository.findFirstBy(List.of(queryField));
-
-        if (existingUserBO != null) {
-            throw new AktieException(EnumErrorCode.USUARIO_CADASTRADO);
-        }
-
-        var userBO = UserMapper.toBO(userDto);
+        var userBO = UserMapper.toBO(dto);
 
         userBO = userRepository.create(userBO);
 
         return UserMapper.toDTO(userBO);
+    }
+
+    private void verifyExistingUser(String document) {
+        var queryFieldDoc = new QueryFieldInfoVO("document", document);
+        var queryFieldDisabled = new QueryFieldInfoVO("disabledAt", null);
+
+        var existingUserBO = userRepository.findFirstBy(List.of(queryFieldDoc, queryFieldDisabled));
+
+        if (existingUserBO != null) {
+            throw new AktieException(EnumErrorCode.USUARIO_CADASTRADO);
+        }
     }
 
 }

@@ -22,15 +22,18 @@ public class UserBO {
 
     private CreatedAtVO createdAt;
 
+    private LocalDateTime updatedAt;
+
     private LocalDateTime disabledAt;
 
-    public UserBO(UuidVO id, String name, String document,
-            CreatedAtVO createdAt, LocalDateTime disabledAt) {
+    public UserBO(UuidVO id, String name, String document, CreatedAtVO createdAt,
+            LocalDateTime updatedAt, LocalDateTime disabledAt) {
         this.id = id;
         this.name = name;
         this.document = document;
         this.disabledAt = disabledAt;
         this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
 
         validate();
     }
@@ -55,17 +58,33 @@ public class UserBO {
         return disabledAt;
     }
 
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
     public void handleDisable() {
         this.disabledAt = LocalDateTime.now();
     }
 
+    public void handleUpdateInfo(String name, String document) {
+        if (StringUtil.isNotNullOrEmpty(name) && !name.equalsIgnoreCase(this.name)) {
+            this.name = name;
+        }
+
+        if (StringUtil.isNotNullOrEmpty(document) && !document.equalsIgnoreCase(this.document)) {
+            this.document = document;
+        }
+
+        this.updatedAt = LocalDateTime.now();
+    }
+
     private void validate() {
         if (StringUtil.isNullOrEmpty(name)) {
-            throw new AktieException(EnumErrorCode.CAMPO_OBRIGATORIO, "nome");
+            throw new AktieException(EnumErrorCode.CAMPO_OBRIGATORIO, "name");
         }
 
         if (StringUtil.isNullOrEmpty(document)) {
-            throw new AktieException(EnumErrorCode.CAMPO_OBRIGATORIO, "documento");
+            throw new AktieException(EnumErrorCode.CAMPO_OBRIGATORIO, "document");
         }
     }
 

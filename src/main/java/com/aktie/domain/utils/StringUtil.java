@@ -16,8 +16,16 @@ public class StringUtil {
         return value != null ? value.toString() : null;
     }
 
+    public static String replaceDot(String str) {
+        return str.replace(".", "");
+    }
+
     public static boolean isNullOrEmpty(String str) {
         return str == null || str.trim().isEmpty() || str.equalsIgnoreCase("null");
+    }
+
+    public static boolean isNotNullOrEmpty(String str) {
+        return !isNullOrEmpty(str);
     }
 
     public static String numbers(String str) {

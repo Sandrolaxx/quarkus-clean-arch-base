@@ -21,6 +21,7 @@ import com.google.gson.reflect.TypeToken;
  *
  * @author SRamos
  */
+@SuppressWarnings("all")
 public class WebApplicationExceptionConverter {
 
     public static <T> T convertExceptionToObject(WebApplicationException exception, Class<T> targetClass) {

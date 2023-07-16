@@ -1,5 +1,10 @@
 package com.aktie.domain.utils;
 
+import java.util.UUID;
+
+import com.aktie.domain.entities.enums.EnumErrorCode;
+import com.aktie.domain.utils.exception.AktieException;
+
 /**
  *
  * @author SRamos
@@ -16,4 +21,13 @@ public class Utils {
         }
         return (T) ((arg0 == null) ? arg1 : arg0);
     }
+
+    public static UUID getUUIDfromStr(String str) {
+        try {
+            return UUID.fromString(str);
+        } catch (Exception e) {
+            throw new AktieException(EnumErrorCode.CAMPO_INVALIDO, "UUID");
+        }
+    }
+
 }

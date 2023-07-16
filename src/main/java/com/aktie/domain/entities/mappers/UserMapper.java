@@ -12,15 +12,16 @@ import com.aktie.domain.entities.vo.UuidVO;
 public class UserMapper {
 
     public static UserDTO toDTO(UserBO bo) {
-        var userDTO = new UserDTO();
+        var dto = new UserDTO();
 
-        userDTO.setDocument(bo.getDocument());
-        userDTO.setName(bo.getName());
-        userDTO.setId(bo.getId().getValue().toString());
-        userDTO.setDisabledAt(bo.getDisabledAt());
-        userDTO.setCreatedAt(bo.getCreatedAt().getValue());
+        dto.setDocument(bo.getDocument());
+        dto.setName(bo.getName());
+        dto.setId(bo.getId().getValue().toString());
+        dto.setDisabledAt(bo.getDisabledAt());
+        dto.setUpdatedAt(bo.getUpdatedAt());
+        dto.setCreatedAt(bo.getCreatedAt().getValue());
 
-        return userDTO;
+        return dto;
     }
 
     public static UserBO toBO(UserDTO dto) {
@@ -29,6 +30,7 @@ public class UserMapper {
                 dto.getName(),
                 dto.getDocument(),
                 new CreatedAtVO(dto.getCreatedAt()),
+                dto.getUpdatedAt(),
                 dto.getDisabledAt());
     }
 

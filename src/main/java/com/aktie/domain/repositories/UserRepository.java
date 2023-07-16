@@ -11,7 +11,9 @@ import com.aktie.domain.entities.vo.QueryFieldInfoVO;
  */
 public interface UserRepository {
 
-    UserBO create(UserBO userBO);
+    UserBO create(UserBO bo);
+
+    UserBO merge(UserBO bo);
 
     List<UserBO> findAllBy(List<QueryFieldInfoVO> queryFieldInfo);
 

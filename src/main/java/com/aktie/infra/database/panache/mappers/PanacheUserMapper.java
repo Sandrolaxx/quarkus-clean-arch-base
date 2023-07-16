@@ -11,25 +11,27 @@ import com.aktie.infra.database.panache.model.PanacheUser;
  */
 public class PanacheUserMapper {
 
-    public static UserBO toDomain(PanacheUser panacheUser) {
+    public static UserBO toDomain(PanacheUser entity) {
         var userBO = new UserBO(
-                new UuidVO(panacheUser.getId().toString()),
-                panacheUser.getName(),
-                panacheUser.getDocument(),
-                new CreatedAtVO(panacheUser.getCreatedAt()),
-                panacheUser.getDisabledAt());
+                new UuidVO(entity.getId().toString()),
+                entity.getName(),
+                entity.getDocument(),
+                new CreatedAtVO(entity.getCreatedAt()),
+                entity.getUpdatedAt(),
+                entity.getDisabledAt());
 
         return userBO;
     }
 
-    public static PanacheUser toEntity(UserBO userBO) {
+    public static PanacheUser toEntity(UserBO bo) {
         var panacheUser = new PanacheUser();
 
-        panacheUser.setId(userBO.getId().getValue());
-        panacheUser.setName(userBO.getName());
-        panacheUser.setDocument(userBO.getDocument());
-        panacheUser.setDisabledAt(userBO.getDisabledAt());
-        panacheUser.setCreatedAt(userBO.getCreatedAt().getValue());
+        panacheUser.setId(bo.getId().getValue());
+        panacheUser.setName(bo.getName());
+        panacheUser.setDocument(bo.getDocument());
+        panacheUser.setDisabledAt(bo.getDisabledAt());
+        panacheUser.setUpdatedAt(bo.getUpdatedAt());
+        panacheUser.setCreatedAt(bo.getCreatedAt().getValue());
 
         return panacheUser;
     }
