@@ -1,9 +1,13 @@
 package com.aktie.domain.useCases;
 
-import com.aktie.domain.entities.UserBO;
+import java.util.List;
+
 import com.aktie.domain.entities.dto.UserDTO;
+import com.aktie.domain.entities.enums.EnumErrorCode;
 import com.aktie.domain.entities.mappers.UserMapper;
+import com.aktie.domain.entities.vo.QueryFieldInfoVO;
 import com.aktie.domain.repositories.UserRepository;
+import com.aktie.domain.utils.exception.AktieException;
 
 /**
  *
@@ -18,15 +22,16 @@ public class CreateUser {
 
     public UserDTO execute(UserDTO userDto) throws Exception {
 
-        UserBO existingUserBO = userRepository.findByDocument(userDto.getDocument());
+        var queryField = new QueryFieldInfoVO("document", userDto.getDocument());
+        var existingUserBO = userRepository.findFirstBy(List.of(queryField));
 
         if (existingUserBO != null) {
-            throw new Exception("Usuário existente");
+            throw new AktieException(EnumErrorCode.USUARIO_CADASTRADO);
         }
 
-        UserBO userBO = UserMapper.toBO(userDto);
+        var userBO = UserMapper.toBO(userDto);
 
-        userBO = userRepository.createUser(userBO);
+        userBO = userRepository.create(userBO);
 
         return UserMapper.toDTO(userBO);
     }

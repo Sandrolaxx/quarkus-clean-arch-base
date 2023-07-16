@@ -12,10 +12,14 @@ public enum EnumErrorCode implements IEnum {
 
     // Erros API
     CAMPO_OBRIGATORIO("001", "O campo {0} é obrigatório!", HttpStatus.SC_BAD_REQUEST),
+    USUARIO_CADASTRADO("002", "Usuário já cadastrado!", HttpStatus.SC_BAD_REQUEST),
     // Erros externos
     ERRO_COMUNICACAO("050", "A requisição enviada ao parceiro retornou com erro!", HttpStatus.SC_BAD_GATEWAY);
 
-    private final String key, erro;
+    private final String key;
+
+    private final String erro;
+
     private final int httpStatus;
 
     private EnumErrorCode(String key, String error, int httpStatus) {
