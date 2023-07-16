@@ -11,7 +11,7 @@ import com.aktie.domain.entities.UserBO;
 import com.aktie.domain.entities.vo.UuidVO;
 import com.aktie.domain.utils.exception.AktieException;
 
-public class UserBOTest {
+public class UserBOTests {
 
     @Test
     @DisplayName("Deve ser possível criar um UserBO informando campos válidos.")
