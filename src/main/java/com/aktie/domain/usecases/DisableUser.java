@@ -1,4 +1,4 @@
-package com.aktie.domain.useCases;
+package com.aktie.domain.usecases;
 
 import java.util.List;
 
