@@ -38,6 +38,14 @@ Se você deseja saber mais sobre Quarkus, visite o site oficial deles: https://q
 
 ---
 
+## Implementação do Repo
+
+Seguindo a teoria neste repositório temos uma implementação com algumas pequenas alterações no modelo original.
+
+![sandrolaxCleanArch](https://github.com/Sandrolaxx/solid-examples/assets/61207420/c01d859d-0f69-46e7-87bf-eabdf444012d)
+
+---
+
 ## 👨‍💻 Executando aplicação em dev mode
 
 Para iniciar o Docker:
