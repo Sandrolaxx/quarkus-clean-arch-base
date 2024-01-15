@@ -7,11 +7,8 @@ import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
-import org.apache.http.HttpStatus;
-
 import com.aktie.domain.entities.enums.EnumErrorCode;
 import com.aktie.domain.utils.DateUtil;
-
 
 /**
  *
@@ -23,6 +20,7 @@ public class ErrorResponseExceptionMapper implements ExceptionMapper<AktieExcept
     @Override
     public Response toResponse(AktieException ex) {
 
+        int BAD_REQUEST = 400;
         int httpStatus;
         var error = EnumErrorCode.parseByKey(ex.getErrorCode());
 
@@ -40,7 +38,7 @@ public class ErrorResponseExceptionMapper implements ExceptionMapper<AktieExcept
             exceptionResponse.setHttpCodeMessage(errorPhrase);
         } else {
             exceptionResponse.setErrorCode(ex.getErrorCode());
-            httpStatus = HttpStatus.SC_BAD_REQUEST;
+            httpStatus = BAD_REQUEST;
         }
 
         return Response.status(httpStatus).entity(exceptionResponse).build();

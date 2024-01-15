@@ -13,4 +13,7 @@ public abstract class AbstractService {
     @Inject
     MongoUserRepository mongoUserRepository;
 
+    @Inject
+    DbFactory dbFactory;
+
 }

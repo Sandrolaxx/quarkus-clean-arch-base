@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import javax.enterprise.context.ApplicationScoped;
 
 import com.aktie.domain.entities.UserBO;
+import com.aktie.domain.entities.enums.EnumDBImpl;
 import com.aktie.domain.entities.vo.QueryFieldInfoVO;
 import com.aktie.domain.repositories.IUserRepository;
 import com.aktie.domain.utils.ListUtil;
@@ -68,6 +69,11 @@ public class PgUserRepository implements IUserRepository {
         return ListUtil.stream(PgUser.list(query.toString(), params))
                 .map(value -> PgUserMapper.toDomain(((PgUser) value)))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public EnumDBImpl getType() {
+        return EnumDBImpl.POSTGRES;
     }
 
 }

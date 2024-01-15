@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import javax.enterprise.context.ApplicationScoped;
 
 import com.aktie.domain.entities.UserBO;
+import com.aktie.domain.entities.enums.EnumDBImpl;
 import com.aktie.domain.entities.vo.QueryFieldInfoVO;
 import com.aktie.domain.repositories.IUserRepository;
 import com.aktie.domain.utils.ListUtil;
@@ -52,7 +53,7 @@ public class MongoUserRepository implements IUserRepository {
 
         if (qfUUID.isPresent()) {
             queryFieldsInfoVO = queryFieldsInfoVO.stream()
-                    .filter(item ->  item.getFieldValue() instanceof UUID == false)
+                    .filter(item -> item.getFieldValue() instanceof UUID == false)
                     .collect(Collectors.toList());
             var newQf = new QueryFieldInfoVO("_id", qfUUID.get().getFieldValue().toString());
 
@@ -82,6 +83,11 @@ public class MongoUserRepository implements IUserRepository {
         return ListUtil.stream(MongoUser.list(query.toString(), params))
                 .map(value -> MongoUserMapper.toDomain(((MongoUser) value)))
                 .collect(Collectors.toList());
+    }
+    
+    @Override
+    public EnumDBImpl getType() {
+        return EnumDBImpl.MONGO;
     }
 
 }

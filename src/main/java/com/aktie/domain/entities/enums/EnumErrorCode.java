@@ -1,7 +1,5 @@
 package com.aktie.domain.entities.enums;
 
-import org.apache.http.HttpStatus;
-
 import com.aktie.domain.utils.EnumUtil;
 
 /**
@@ -11,12 +9,12 @@ import com.aktie.domain.utils.EnumUtil;
 public enum EnumErrorCode implements IEnum {
 
     // Internal errors
-    CAMPO_OBRIGATORIO("001", "O campo {0} é obrigatório!", HttpStatus.SC_BAD_REQUEST),
-    USUARIO_CADASTRADO("002", "Usuário já possui cadastro ativo!", HttpStatus.SC_BAD_REQUEST),
-    USUARIO_NAO_ENCONTRADO_FILTROS("003", "Nenhum usuário encontrado para ({0}) informado!", HttpStatus.SC_NOT_FOUND),
-    CAMPO_INVALIDO("004", "{0} informado inválido!", HttpStatus.SC_NOT_FOUND),
+    CAMPO_OBRIGATORIO("001", "O campo {0} é obrigatório!", 400),
+    USUARIO_CADASTRADO("002", "Usuário já possui cadastro ativo!", 400),
+    USUARIO_NAO_ENCONTRADO_FILTROS("003", "Nenhum usuário encontrado para ({0}) informado!", 404),
+    CAMPO_INVALIDO("004", "{0} informado inválido!", 404),
     // External errors
-    ERRO_COMUNICACAO("050", "A requisição enviada ao parceiro retornou com erro!", HttpStatus.SC_BAD_GATEWAY);
+    ERRO_COMUNICACAO("050", "A requisição enviada ao parceiro retornou com erro!", 502);
 
     private final String key;
 

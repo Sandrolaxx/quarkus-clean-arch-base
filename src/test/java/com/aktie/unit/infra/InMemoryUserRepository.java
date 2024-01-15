@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.aktie.domain.entities.UserBO;
+import com.aktie.domain.entities.enums.EnumDBImpl;
 import com.aktie.domain.entities.vo.QueryFieldInfoVO;
 import com.aktie.domain.entities.vo.UuidVO;
 import com.aktie.domain.repositories.IUserRepository;
@@ -59,6 +60,11 @@ public class InMemoryUserRepository implements IUserRepository {
     @Override
     public UserBO findFirstBy(List<QueryFieldInfoVO> queryFieldInfo) {
         return ListUtil.first(findAllBy(queryFieldInfo));
+    }
+
+    @Override
+    public EnumDBImpl getType() {
+        return EnumDBImpl.POSTGRES;
     }
 
 }

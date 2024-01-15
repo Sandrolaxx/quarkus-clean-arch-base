@@ -29,6 +29,7 @@ public class UserResourceTest {
         given()
                 .when()
                 .header("Content-Type", "application/json")
+                .header("dbImpl", "POSTGRES")
                 .body(payload)
                 .post("/api/v1/user")
                 .then()
@@ -43,6 +44,7 @@ public class UserResourceTest {
         given()
                 .when()
                 .header("userId", UUID.randomUUID().toString())
+                .header("dbImpl", "POSTGRES")
                 .get("/api/v1/user")
                 .then()
                 .statusCode(404);
@@ -54,6 +56,7 @@ public class UserResourceTest {
         given()
                 .when()
                 .header("document", "10254564392")
+                .header("dbImpl", "POSTGRES")
                 .get("/api/v1/user/all")
                 .then()
                 .statusCode(200)
