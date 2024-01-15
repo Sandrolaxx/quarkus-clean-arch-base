@@ -1,6 +1,7 @@
-package com.aktie.infra.database.panache.repositories;
+package com.aktie.infra.database.mongo.repositories;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -10,30 +11,30 @@ import com.aktie.domain.entities.vo.QueryFieldInfoVO;
 import com.aktie.domain.repositories.IUserRepository;
 import com.aktie.domain.utils.ListUtil;
 import com.aktie.domain.utils.StringUtil;
-import com.aktie.infra.database.panache.mappers.PanacheUserMapper;
-import com.aktie.infra.database.panache.model.PanacheUser;
+import com.aktie.infra.database.mongo.mappers.MongoUserMapper;
+import com.aktie.infra.database.mongo.model.MongoUser;
 
 /**
  *
  * @author SRamos
  */
 @ApplicationScoped
-public class PanacheUserRepository implements IUserRepository {
+public class MongoUserRepository implements IUserRepository {
 
     @Override
     public UserBO create(UserBO bo) {
-        var panacheUser = PanacheUserMapper.toEntity(bo);
+        var mongoUser = MongoUserMapper.toEntity(bo);
 
-        panacheUser.persist();
+        mongoUser.persist();
 
-        return PanacheUserMapper.toDomain(panacheUser);
+        return MongoUserMapper.toDomain(mongoUser);
     }
 
     @Override
     public UserBO merge(UserBO bo) {
-        var entity = PanacheUserMapper.toEntity(bo);
+        var entity = MongoUserMapper.toEntity(bo);
 
-        PanacheUser.getEntityManager().merge(entity);
+        entity.update();
 
         return bo;
     }
@@ -45,6 +46,19 @@ public class PanacheUserRepository implements IUserRepository {
 
     @Override
     public List<UserBO> findAllBy(List<QueryFieldInfoVO> queryFieldsInfoVO) {
+        var qfUUID = queryFieldsInfoVO.stream()
+                .filter(item -> item.getFieldValue() instanceof UUID)
+                .findFirst();
+
+        if (qfUUID.isPresent()) {
+            queryFieldsInfoVO = queryFieldsInfoVO.stream()
+                    .filter(item ->  item.getFieldValue() instanceof UUID == false)
+                    .collect(Collectors.toList());
+            var newQf = new QueryFieldInfoVO("_id", qfUUID.get().getFieldValue().toString());
+
+            queryFieldsInfoVO.add(newQf);
+        }
+
         var params = ListUtil.stream(queryFieldsInfoVO)
                 .filter(item -> item.getFieldValue() != null)
                 .collect(Collectors.toMap(
@@ -65,8 +79,8 @@ public class PanacheUserRepository implements IUserRepository {
             }
         });
 
-        return ListUtil.stream(PanacheUser.list(query.toString(), params))
-                .map(value -> PanacheUserMapper.toDomain(((PanacheUser) value)))
+        return ListUtil.stream(MongoUser.list(query.toString(), params))
+                .map(value -> MongoUserMapper.toDomain(((MongoUser) value)))
                 .collect(Collectors.toList());
     }
 

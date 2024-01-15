@@ -1,17 +1,17 @@
-package com.aktie.infra.database.panache.mappers;
+package com.aktie.infra.database.postgres.mappers;
 
 import com.aktie.domain.entities.UserBO;
 import com.aktie.domain.entities.vo.CreatedAtVO;
 import com.aktie.domain.entities.vo.UuidVO;
-import com.aktie.infra.database.panache.model.PanacheUser;
+import com.aktie.infra.database.postgres.model.PgUser;
 
 /**
  *
  * @author SRamos
  */
-public class PanacheUserMapper {
+public class PgUserMapper {
 
-    public static UserBO toDomain(PanacheUser entity) {
+    public static UserBO toDomain(PgUser entity) {
         var userBO = new UserBO(
                 new UuidVO(entity.getId().toString()),
                 entity.getName(),
@@ -23,8 +23,8 @@ public class PanacheUserMapper {
         return userBO;
     }
 
-    public static PanacheUser toEntity(UserBO bo) {
-        var panacheUser = new PanacheUser();
+    public static PgUser toEntity(UserBO bo) {
+        var panacheUser = new PgUser();
 
         panacheUser.setId(bo.getId().getValue());
         panacheUser.setName(bo.getName());

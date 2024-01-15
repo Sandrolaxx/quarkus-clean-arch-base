@@ -1,46 +1,37 @@
-package com.aktie.infra.database.panache.model;
+package com.aktie.infra.database.mongo.model;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.bson.codecs.pojo.annotations.BsonId;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import io.quarkus.mongodb.panache.PanacheMongoEntityBase;
+import io.quarkus.mongodb.panache.common.MongoEntity;
 
 /**
  *
  * @author SRamos
  */
-@Entity
-@Table(name = "AKT_USER")
-public class PanacheUser extends PanacheEntityBase {
+@MongoEntity(collection = "AKT_USER")
+public class MongoUser extends PanacheMongoEntityBase {
 
-    @Id
-    private UUID id;
+    @BsonId
+    private String id;
 
-    @Column(name = "NAME")
     private String name;
 
-    @Column(name = "DOCUMENT")
     private String document;
 
-    @Column(name = "CREATED_AT")
     private LocalDateTime createdAt;
 
-    @Column(name = "UPDATED_AT")
     private LocalDateTime updatedAt;
 
-    @Column(name = "DISABLED_AT")
     private LocalDateTime disabledAt;
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 

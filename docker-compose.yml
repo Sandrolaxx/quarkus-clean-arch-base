@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  pg-test:
+        image: postgres:13
+        container_name: "pg-test"
+        environment:
+          POSTGRES_USER: pg-test
+          POSTGRES_PASSWORD: 1329
+        ports:  
+        - "5446:5432"
+ 
+  mongodb:
+    image: bitnami/mongodb:5.0
+    container_name: "mongo-test"
+    ports:
+      - "27017:27017"
+    environment:
+      MONGODB_REPLICA_SET_MODE: primary
+      MONGODB_ROOT_USER: mongotest
+      MONGODB_ROOT_PASSWORD: 1329
+      MONGODB_REPLICA_SET_KEY: 123456

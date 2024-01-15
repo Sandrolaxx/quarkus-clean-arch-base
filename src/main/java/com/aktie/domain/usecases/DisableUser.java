@@ -25,7 +25,6 @@ public class DisableUser {
     public UserDTO execute(String userId) {
 
         var queryFieldDoc = new QueryFieldInfoVO("id", Utils.getUUIDfromStr(userId));
-
         var existingUserBO = userRepository.findFirstBy(List.of(queryFieldDoc));
 
         if (existingUserBO == null) {

@@ -26,42 +26,44 @@ public class UserService extends AbstractService {
 
     @Transactional
     public UserDTO create(UserDTO dto) {
-        var createUser = new CreateUser(panacheUserRepository);
+        var createUser = new CreateUser(mongoUserRepository);
 
         return createUser.execute(dto);
     }
 
     @Transactional
     public UserDTO updateInfo(UserDTO dto, String userId) {
-        var updateUserInfo = new UpdateUserInfo(panacheUserRepository);
+        var updateUserInfo = new UpdateUserInfo(mongoUserRepository);
 
         return updateUserInfo.execute(dto, userId);
     }
 
     @Transactional
     public UserDTO disable(String userId) {
-        var disableUser = new DisableUser(panacheUserRepository);
+        var disableUser = new DisableUser(mongoUserRepository);
 
         return disableUser.execute(userId);
     }
 
     public UserDTO findBy(String userId) {
+
         if (StringUtil.isNullOrEmpty(userId)) {
             throw new AktieException(EnumErrorCode.CAMPO_OBRIGATORIO, "userId");
         }
 
-        var findUserBy = new FindUserBy(panacheUserRepository);
+        var findUserBy = new FindUserBy(mongoUserRepository);
         var queryFieldUserId = new QueryFieldInfoVO("id", Utils.getUUIDfromStr(userId));
 
         return findUserBy.execute(List.of(queryFieldUserId), true);
     }
 
     public List<UserDTO> listBy(String document) {
+        
         if (StringUtil.isNullOrEmpty(document)) {
             throw new AktieException(EnumErrorCode.CAMPO_OBRIGATORIO, "document");
         }
 
-        var findAllBy = new ListUsersBy(panacheUserRepository);
+        var findAllBy = new ListUsersBy(mongoUserRepository);
         var queryFieldUserId = new QueryFieldInfoVO("document", document);
 
         return findAllBy.execute(List.of(queryFieldUserId), true);
