@@ -1,6 +1,6 @@
 package com.aktie.services;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import com.aktie.infra.database.mongo.repositories.MongoUserRepository;
 import com.aktie.infra.database.postgres.repositories.PgUserRepository;

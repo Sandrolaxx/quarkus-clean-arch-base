@@ -2,13 +2,13 @@ package com.aktie.domain.utils.exception;
 
 import java.time.LocalDateTime;
 
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
-import javax.ws.rs.ext.ExceptionMapper;
-import javax.ws.rs.ext.Provider;
-
 import com.aktie.domain.entities.enums.EnumErrorCode;
 import com.aktie.domain.utils.DateUtil;
+
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response.Status;
+import jakarta.ws.rs.ext.ExceptionMapper;
+import jakarta.ws.rs.ext.Provider;
 
 /**
  *

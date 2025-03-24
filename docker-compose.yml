@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   pg-test:
-        image: postgres:13
+        image: postgres:16.2-alpine3.19
         container_name: "pg-test"
         environment:
           POSTGRES_USER: pg-test

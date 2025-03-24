@@ -2,8 +2,8 @@ package com.aktie.services;
 
 import java.util.List;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.transaction.Transactional;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.transaction.Transactional;
 
 import com.aktie.domain.entities.dto.UserDTO;
 import com.aktie.domain.entities.enums.EnumDBImpl;

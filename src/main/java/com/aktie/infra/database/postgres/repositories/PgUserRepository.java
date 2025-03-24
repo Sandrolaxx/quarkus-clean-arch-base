@@ -3,7 +3,7 @@ package com.aktie.infra.database.postgres.repositories;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import com.aktie.domain.entities.UserBO;
 import com.aktie.domain.entities.enums.EnumDBImpl;
