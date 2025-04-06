@@ -1,5 +1,16 @@
 # Aplicação Quarkus com Clean Architeture
 
+Abaixo, os conteúdos do readme estão dispostos da seguinte forma:
+* 🏗 O que seria Clean Architeture?
+* 📂 Estrutura das pastas
+* 🗃 Implementação do Repo
+* ✨ O que seria Quarkus?
+* 🤔 Sobre o projeto?
+* 👨‍💻 Executando aplicação em dev mode
+* 📦 Empacotando e executando a aplicação
+* 🌪 Criando um executável nativo
+* 🔌 Extenções utilizadas
+
 ## 🏗 O que seria Clean Architeture?
 
 Desde o início de sua jornada como dev, você deve estar ciente dos problemas que um código sujo traz, não em um primeiro momento, mas sim algum tempo depois, com bug's aleatórios e a dificuldade na manutenção.
@@ -24,6 +35,117 @@ Durante as últimas décadas, viu-se a evolução de um apanhado de ideias impor
 
 ---
 
+## 📂 Estrutura das pastas
+
+```
+src/
+└── main/
+    ├── docker/
+    └── java/
+        └── com/
+            └── aktie/
+                ├── domain/
+                │   ├── entities/
+                │   │   ├── dto/
+                │   │   ├── enums/
+                │   │   ├── mappers/
+                │   │   ├── vo/
+                │   │   └── UserBO.java
+                │   ├── repositories/
+                │   │   └── IUserRepository.java
+                │   └── usecases/
+                │       ├── CreateUser.java
+                │       ├── DisableUser.java
+                │       ├── FindUserBy.java
+                │       ├── ListUsersBy.java
+                │       └── UpdateUserInfo.java
+                ├── utils/
+                │   ├── exception/
+                │   │   ├── AktieException.java
+                │   │   ├── AktieExceptionResponseDto.java
+                │   │   └── ErrorResponseExceptionMapper.java
+                │   ├── DateUtil.java
+                │   ├── EnumUtil.java
+                │   ├── ListUtil.java
+                │   ├── NumericUtil.java
+                │   ├── StringUtil.java
+                │   └── Utils.java
+                infra/
+                └── database/
+                    ├── mongo/
+                    │   ├── mappers/
+                    │   │   └── MongoUserMapper.java
+                    │   ├── model/
+                    │   │   └── MongoUser.java
+                    │   └── repositories/
+                    │       └── MongoUserRepository.java
+                    └── postgres/
+                        ├── mappers/
+                        │   └── PgUserMapper.java
+                        ├── model/
+                        │   └── PgUser.java
+                        └── repositories/
+                            └── PgUserRepository.java
+                presentation/
+                └── controllers/
+                    └── UserController.java
+                services/
+                ├── AbstractService.java
+                ├── DbFactory.java
+                └── UserService.java
+resources/
+├── META-INF
+│    └── resources
+│        └── index.html
+└── application.properties
+test/
+└── java/
+    └── com/
+        └── aktie/
+            ├── integration/
+            │   └── config/
+            │       ├── AktieTestLifeCycleManager.java
+            │       └── UserResourceTest.java
+            │
+            └── unit/
+                ├── domain/
+                │   ├── bo/
+                │   │   └── UserBOTests.java
+                │   └── usecase/
+                │       └── UserUseCases.java
+                │
+                └── infra/
+                    └── InMemoryUserRepository.java
+```
+
+### Resumo das principais pastas e responsabilidades:
+
+- `domain/`: Camada de domínio, conforme a arquitetura limpa.
+    - `entities/`: Contém objetos de negócio (como `UserBO`) e estruturas auxiliares (`dto`, `enums`, `mappers`, `vo`).
+    - `repositories/`: Interfaces de abstração para os repositórios.
+    - `usecases/`: Casos de uso que orquestram as regras de negócio da aplicação.
+- `utils/`: Utilitários genéricos.
+  - `exception/`: Estrutura de tratamento e mapeamento de exceções customizadas.
+- `infra/database/mongo` e `postgres`: Implementações específicas para persistência (MongoDB e PostgreSQL), contendo:
+    - `mappers/`: Conversão entre entidades de domínio e modelos de banco.
+    - `model/`: Representações das entidades persistidas nos bancos.
+    - `repositories/`: Implementações dos repositórios para cada tecnologia.
+- `presentation/controllers`: Contém o controlador UserController.java, responsável por expor os endpoints HTTP.
+- `services/`:
+    - `AbstractService.java`: Provavelmente define uma base comum para serviços.
+    - `DbFactory.java`: Responsável por decidir entre Mongo/Postgres.
+    - `UserService.java`: Contém lógica de orquestração relacionada a usuários.
+
+---
+
+## 🗃 Implementação do Repo
+
+Seguindo a teoria neste repositório temos uma implementação com algumas pequenas alterações no modelo original.
+
+![sandrolaxCleanArch](https://github.com/Sandrolaxx/solid-examples/assets/61207420/c01d859d-0f69-46e7-87bf-eabdf444012d)
+
+---
+
 ## ✨ O que seria Quarkus?
 
 Quarkus é um framework Java nativo em Kubernetes e de stack completo que foi desenvolvido para máquinas virtuais Java (JVMs) e compilação nativa. Ele otimiza essa linguagem especificamente para containers, fazendo com que essa tecnologia seja uma plataforma eficaz para ambientes [serverless](https://www.redhat.com/pt-br/topics/cloud-native-apps/what-is-serverless), de [nuvem](https://www.redhat.com/pt-br/topics/cloud) e [Kubernetes](https://www.redhat.com/pt-br/topics/containers/what-is-kubernetes).
@@ -44,14 +166,6 @@ Se você deseja saber mais sobre Quarkus, visite o site oficial deles: https://q
 Consiste em uma API(CRUD de usuário) onde é possível passar no parâmetro da requisição qual implementação de banco de dados será utilizada, não parece algo muito corriqueiro, poderíamos ter uma lógica de negócio mais avançada aqui, porém foi implementado desta forma para facilitar a compreensão de uma das ideias principais por trás da arquitetura limpa, o alto nível de desacoplamento.
 
 Temos duas opções de implementação que podem ser passadas no header, `POSTGRES`, onde irá realizar a persistência no banco de dados relacional PostgreSQL, e a outra opção `MONGO`, onde será realizada a persistência no banco de dados NoSql MongoDB.
-
----
-
-## 🗃 Implementação do Repo
-
-Seguindo a teoria neste repositório temos uma implementação com algumas pequenas alterações no modelo original.
-
-![sandrolaxCleanArch](https://github.com/Sandrolaxx/solid-examples/assets/61207420/c01d859d-0f69-46e7-87bf-eabdf444012d)
 
 ---
 
