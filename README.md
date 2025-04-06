@@ -132,9 +132,9 @@ test/
     - `repositories/`: Implementações dos repositórios para cada tecnologia.
 - `presentation/controllers`: Contém o controlador UserController.java, responsável por expor os endpoints HTTP.
 - `services/`:
-    - `AbstractService.java`: Provavelmente define uma base comum para serviços.
+    - `AbstractService.java`: Base para todos os serviços, contém ponto único de injeção de dependência e variáveis de ambiente.
     - `DbFactory.java`: Responsável por decidir entre Mongo/Postgres.
-    - `UserService.java`: Contém lógica de orquestração relacionada a usuários.
+    - `UserService.java`: Contém lógica de orquestração relacionada a usuários, chamada do caso de uso e definição de implementação concreta.
 
 ---
 
